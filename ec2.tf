@@ -25,7 +25,7 @@ resource "aws_instance" "app1" {
 }
 
 resource "aws_instance" "app2" {
-  ami           = "ami-0c02fb55956c7d316" # Ubuntu AMI (update as needed)
+  ami           = "ami-00ca32bbc84273381" # Ubuntu AMI (update as needed)
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public2.id
   security_groups = [aws_security_group.ec2_sg.id]
@@ -49,7 +49,7 @@ resource "aws_instance" "app2" {
 }
 
 resource "aws_instance" "app3" {
-  ami           = "ami-0c02fb55956c7d316" # Ubuntu AMI (update as needed)
+  ami           = "ami-00ca32bbc84273381" # Ubuntu AMI (update as needed)
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public3.id
   security_groups = [aws_security_group.ec2_sg.id]
