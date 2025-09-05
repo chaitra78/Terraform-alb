@@ -77,7 +77,7 @@ resource "aws_lb_target_group" "Register_tg" {
 
 
 resource "aws_lb_listener" "http_listener_home" {
-  load_balancer_arn = aws_lb.app_alb
+  load_balancer_arn = aws_lb.app_alb.arn
   port              = 80
   protocol          = "HTTP"
 
