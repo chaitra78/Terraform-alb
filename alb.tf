@@ -90,7 +90,7 @@ resource "aws_lb_listener" "http_listener_home" {
 
 resource "aws_lb_listener_rule" "path_based_routing_images" {
   listener_arn = aws_lb_listener.http_listener_home.arn
-  priority     = 100
+  priority     = 10
 
   action {
     type             = "forward"
