@@ -1,5 +1,5 @@
 #1. User Data Script to Install Nginx
-data "template_file1" "nginx_user_data" {
+data "template_file" "nginx_user_home" {
   template = <<-EOF
               #!/bin/bash
               sudo apt update -y
@@ -10,7 +10,7 @@ data "template_file1" "nginx_user_data" {
             EOF
 }
 
-data "template_file2" "nginx_user_data" {
+data "template_file" "nginx_user_images" {
   template = <<-EOF
               #!/bin/bash
               sudo apt update -y
@@ -22,7 +22,7 @@ data "template_file2" "nginx_user_data" {
 }
 
 
-data "template_file3" "nginx_user_data" {
+data "template_file" "nginx_user_register" {
   template = <<-EOF
               #!/bin/bash
               sudo apt update -y
@@ -40,7 +40,7 @@ resource "aws_instance" "app1" {
   subnet_id     = aws_subnet.public1.id
   security_groups = [aws_security_group.ec2_sg.id]
 
-  user_data = data.template_file1.nginx_user_data.rendered
+  user_data = data.template_file.nginx_user_home.rendered
 
   tags = {
     Name = "App1-Instance1"
@@ -53,7 +53,7 @@ resource "aws_instance" "app2" {
   subnet_id     = aws_subnet.public2.id
   security_groups = [aws_security_group.ec2_sg.id]
 
-  user_data = data.template_file2.nginx_user_data.rendered
+  user_data = data.template_file.nginx_user_images.rendered
 
   tags = {
     Name = "App1-Instance2"
@@ -66,7 +66,7 @@ resource "aws_instance" "app3" {
   subnet_id     = aws_subnet.public3.id
   security_groups = [aws_security_group.ec2_sg.id]
 
-  user_data = data.template_file3.nginx_user_data.rendered
+  user_data = data.template_file.nginx_user_register.rendered
 
   tags = {
     Name = "App1-Instance3"
