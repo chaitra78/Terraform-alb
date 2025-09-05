@@ -55,7 +55,7 @@ resource "aws_lb_target_group" "Images_tg" {
   }
 }
 
-resource "aws_lb_target_group" "Registry_tg" {
+resource "aws_lb_target_group" "Register_tg" {
   name     = "app3-tg"
   port     = 80
   protocol = "HTTP"
@@ -77,7 +77,7 @@ resource "aws_lb_target_group" "Registry_tg" {
 
 
 resource "aws_lb_listener" "http_listener_home" {
-  load_balancer_arn = aws_lb.my_alb.arn
+  load_balancer_arn = aws_lb.app_alb
   port              = 80
   protocol          = "HTTP"
 
@@ -89,7 +89,7 @@ resource "aws_lb_listener" "http_listener_home" {
 
 
 resource "aws_lb_listener_rule" "path_based_routing_images" {
-  listener_arn = aws_lb_listener.http_listener.arn
+  listener_arn = aws_lb_listener.http_listener_home.arn
   priority     = 100
 
   action {
@@ -105,7 +105,7 @@ resource "aws_lb_listener_rule" "path_based_routing_images" {
 }
 
   resource "aws_lb_listener_rule" "path_based_routing_register" {
-  listener_arn = aws_lb_listener.http_listener.arn
+  listener_arn = aws_lb_listener.http_listener_home.arn
   priority     = 100
 
   action {
@@ -128,12 +128,12 @@ resource "aws_lb_target_group_attachment" "app1_attach_home" {
   target_id        = aws_instance.app1.id
   }
 
-  resource "aws_lb_target_group_attachment" "app1_attach_images" {
+  resource "aws_lb_target_group_attachment" "app2_attach_images" {
   target_group_arn = aws_lb_target_group.Images_tg.arn
   target_id        = aws_instance.app2.id
   }
 
-  resource "aws_lb_target_group_attachment" "app1_attach_register" {
+  resource "aws_lb_target_group_attachment" "app3_attach_register" {
   target_group_arn = aws_lb_target_group.Register_tg.arn
   target_id        = aws_instance.app3.id
   }
